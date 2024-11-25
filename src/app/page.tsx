@@ -1,5 +1,5 @@
 'use client'
-import { MouseEventHandler, useState } from "react";
+import {  useEffect, useState } from "react";
 import { serverUrl } from "./constants";
 import PlayerRankInfo from "./PlayerRankInfo";
 export default function Home() {
@@ -8,11 +8,11 @@ export default function Home() {
   const [isFoundPlayersLoading, setIsFoundPlayersLoading] = useState<boolean>(false)
 
   const [cannotFoundName,setCannotFoundName] = useState<string>("")
-
-  console.log("foundplayers:")
-  console.log(foundPlayers)
-
   const [searchedPlayer, setSearchedPlayer] = useState<string>("")
+
+  useEffect(()=>{
+    getRank(null)
+  },[])
 
     async function  getRank(e: any){
     if (isFoundPlayersLoading) {
@@ -57,6 +57,9 @@ export default function Home() {
           onClick={getRank}
         >Get Rank</button>
       </div>
+      <div className="text-white text-lg">You can search in this format Player(number)</div>
+      <div className="text-white text-lg">number can be 10000</div>
+
       <div style={{ backgroundColor: "#1C172B" }} className="flex flex-1 w-3/4 p-2">
         <div style={{ flex: 2, color: "#74737B" }} className="text-lg">
           Ranking
@@ -73,9 +76,7 @@ export default function Home() {
           Money
         </div>
       </div>
-
       {
-
         (isFoundPlayersLoading) ?
           <div className="text-white text-xl m-4">Loading</div>
           : (foundPlayers.length === 0 && cannotFoundName !== "")
@@ -90,14 +91,8 @@ export default function Home() {
               />)
 
             })
-
       }
 
     </div>
-
-
-
-
-
   );
 }
