@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-color-input{
+
+  background-color: #251E40;
+}
+
+.bg-main-page{
+
+  background-color: #2D1059;
+}
