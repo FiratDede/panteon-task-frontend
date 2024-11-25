@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { serverUrl } from "./constants";
 import PlayerRankInfo from "./PlayerRankInfo";
 export default function Home() {
@@ -14,9 +14,9 @@ export default function Home() {
 
   const [searchedPlayer, setSearchedPlayer] = useState<string>("")
 
-  const getRank = async (e: Event) => {
+    async function  getRank(e: any){
     if (isFoundPlayersLoading) {
-      return;
+      return
     }
     setIsFoundPlayersLoading(true)
     let response = await fetch(serverUrl + "/leaderBoard/latest/list",
@@ -30,9 +30,10 @@ export default function Home() {
     )
     if (!response.ok) {
       setIsFoundPlayersLoading(false)
-
+      
       console.log("error")
       return
+      
     }
     const data = await response.json();
     setIsFoundPlayersLoading(false)
